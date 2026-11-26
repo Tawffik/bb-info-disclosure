@@ -133,3 +133,16 @@ Do not hunt for extra data. Hunt for a **broken visibility invariant** with repr
 
 ---
 _Synced from Notion Bug Bounty Methodology OS · agent skill ready · authorized research only._
+
+## Fix patterns (remediation guidance)
+
+Confirmed disclosures should close with these controls (adapted from the [AgntX-Hunter](https://github.com/Monesgoda/AgntX-Hunter) `web-fingerprinting` playbook, MIT License, Copyright (c) 2026 mones goda mohamed, reviewed at commit 59056b9):
+
+- Minimize server tokens (`ServerTokens Prod`, `ServerSignature Off`; nginx `server_tokens off`).
+- Remove `X-Powered-By` at the framework or server level.
+- Strip or randomize the `ETag` format to block version inference.
+- Never ship `.map` files to production; exclude them in the build pipeline.
+- Audit JS bundles for secrets before deployment; secrets live in runtime environment variables only.
+- Use framework-neutral cookie names.
+- `Cache-Control: no-store` on error pages to prevent cached stack traces.
+
